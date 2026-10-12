@@ -1,0 +1,33 @@
+import random
+
+WIN_LINES = [
+    (0, 1, 2), (3, 4, 5), (6, 7, 8),  # rows
+    (0, 3, 6), (1, 4, 7), (2, 5, 8),  # columns
+    (0, 4, 8), (2, 4, 6),             # diagonals
+]
+
+class Game:
+    def __init__(self):
+        self.board = ["", "", "", "", "", "", "", "", ""]
+
+    def won(board: list[str]) -> str | None:
+        """Return the winning mark ("X" or "O"), or None if nobody has won."""
+        for a, b, c in WIN_LINES:
+            if board[a] and board[a] == board[b] == board[c]:
+                return board[a]
+        return None
+
+def init_game():
+    board = ["", "", "", "", "", "", "", "", ""]
+
+    return board
+
+def random_step(board: list[str]):
+    pos = random.randint(0, 8)
+    while board[pos] != "":
+        pos = random.randint(0, 8)
+    board[pos] = "o"
+    return pos
+
+def bot_step(board: list[str], pos: int):
+    board[pos] = "x"
